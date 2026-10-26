@@ -1,4 +1,4 @@
-name: Build, test, benchmark and docs
+name: CI
 
 on:
   push:
@@ -15,33 +15,33 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install Doxygen
         run: sudo apt-get update && sudo apt-get install -y doxygen
-      - name: Configure Release build
+      - name: Configure
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
       - name: Build
         run: cmake --build build --parallel 2
-      - name: Unit tests
+      - name: Tests
         run: ctest --test-dir build --output-on-failure
-      - name: Run demo
+      - name: Example
         run: ./build/quant_demo
-      - name: Benchmark (results in job log)
+      - name: Benchmark
         shell: bash
         run: |
           set -o pipefail
           ./build/quant_benchmark 2>&1 | tee benchmark.txt
           cat benchmark.txt >> "$GITHUB_STEP_SUMMARY"
-      - name: Generate Doxygen documentation
+      - name: Doxygen
         run: cmake --build build --target docs
-      - name: Save benchmark report
+      - name: Upload benchmark
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-results
           path: benchmark.txt
-      - name: Save documentation
+      - name: Upload docs
         uses: actions/upload-artifact@v4
         with:
           name: doxygen-html
           path: build/docs/html
-      - name: Prepare Pages artifact
+      - name: Upload Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         uses: actions/upload-pages-artifact@v3
         with:
@@ -58,6 +58,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy documentation to GitHub Pages
+      - name: Publish docs
         id: deployment
         uses: actions/deploy-pages@v4

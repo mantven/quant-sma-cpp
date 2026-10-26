@@ -14,7 +14,7 @@ int main() {
             prices[i] = 100.0 + std::sin(static_cast<double>(i) * 0.01);
         }
         ankerl::nanobench::Bench()
-            .title("SMA, window=20 (validation and allocation included)")
+            .title("SMA, window=20, full function call")
             .unit("price")
             .batch(static_cast<std::uint64_t>(count))
             .warmup(20)

@@ -1,10 +1,9 @@
-# Vendored dependencies
+# Сторонние библиотеки
 
-The headers are included so builds do not require network access.
+Здесь лежат заголовочные файлы doctest и nanobench вместе с лицензиями.
+Они добавлены в репозиторий, чтобы при сборке не приходилось скачивать их заново.
 
-| Library | Version | Source | License |
+| Библиотека | Версия | Откуда взята | Лицензия |
 | --- | --- | --- | --- |
-| doctest | 2.4.12 | https://github.com/doctest/doctest/tree/v2.4.12 | MIT, see doctest/LICENSE.txt |
-| nanobench | 4.3.11 | https://github.com/martinus/nanobench/tree/v4.3.11 | MIT, see nanobench/LICENSE |
-
-Only the upstream single headers and licenses are vendored.
+| doctest | 2.4.12 | https://github.com/doctest/doctest/tree/v2.4.12 | MIT, файл doctest/LICENSE.txt |
+| nanobench | 4.3.11 | https://github.com/martinus/nanobench/tree/v4.3.11 | MIT, файл nanobench/LICENSE |
